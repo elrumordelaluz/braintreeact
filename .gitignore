@@ -1,0 +1,6 @@
+/dist
+/lib
+/node_modules
+/example/node_modules
+/example/build
+.env.local

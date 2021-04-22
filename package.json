@@ -1,0 +1,37 @@
+{
+  "name": "braintreeact",
+  "version": "1.0.0",
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/esm/index.js",
+  "types": "./lib/esm/index.d.ts",
+  "author": "Lionel Tzatzkin <elrumordelaluz@hotmail.com> (https://elrumordelaluz.com/)",
+  "license": "MIT",
+  "devDependencies": {
+    "@paypal/checkout-components": "5.0.153",
+    "@paypal/paypal-js": "3.1.7",
+    "@paypal/react-paypal-js": "6.0.0",
+    "@rollup/plugin-typescript": "8.2.1",
+    "@types/braintree-web": "3.75.0",
+    "@types/paypal-checkout-components": "4.0.1",
+    "@types/react": "17.0.3",
+    "@types/react-dom": "17.0.3",
+    "braintree-web": "3.76.2",
+    "paypal-checkout": "4.0.329",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "rollup": "2.45.2",
+    "rollup-plugin-typescript2": "0.30.0",
+    "tslib": "2.2.0",
+    "typescript": "4.2.4"
+  },
+  "peerDependencies": {
+    "@paypal/paypal-js": "latest",
+    "braintree-web": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "watch": "rollup -cw"
+  }
+}
