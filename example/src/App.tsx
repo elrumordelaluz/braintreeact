@@ -106,9 +106,7 @@ function App() {
 }
 
 function Results() {
-  const { paypalPayload, reset, getPayload, paypalReady } = useContext(
-    DropinContext
-  )
+  const { paypalPayload, reset, paypalReady } = useContext(DropinContext)
   return (
     <>
       {paypalReady ? null : 'loading paypal'}
