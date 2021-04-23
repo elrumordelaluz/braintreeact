@@ -28,6 +28,7 @@
   },
   "scripts": {
     "build": "rollup -c",
-    "watch": "rollup -cw"
+    "watch": "rollup -cw",
+    "prepublish": "rollup -c"
   }
 }
