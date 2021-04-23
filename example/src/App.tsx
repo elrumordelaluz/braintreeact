@@ -98,20 +98,39 @@ function App() {
           </label>
         </div>
         <Field type="cvv" prefill="123" />
-        <PaypalButton />
+        <CustomButton />
         <Results />
       </Dropin>
     </div>
   )
 }
 
+function CustomButton() {
+  const { paypalPayload } = useContext(DropinContext)
+  return <>{paypalPayload ? JSON.stringify(paypalPayload) : <PaypalButton />}</>
+}
+
 function Results() {
-  const { paypalPayload, reset, paypalReady } = useContext(DropinContext)
+  const { paypalPayload, reset, paypalReady, getPayload } = useContext(
+    DropinContext
+  )
   return (
     <>
       {paypalReady ? null : 'loading paypal'}
       {paypalPayload ? JSON.stringify(paypalPayload) : null}
       <button onClick={reset}>reset</button>
+      <button
+        onClick={async () => {
+          try {
+            const nonce = await getPayload()
+            alert(JSON.stringify({ nonce }))
+          } catch (err) {
+            console.log({ err })
+          }
+        }}
+      >
+        Pay
+      </button>
     </>
   )
 }

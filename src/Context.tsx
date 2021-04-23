@@ -226,11 +226,11 @@ const DropinProvider: React.FC<DropinProps> = ({
         if (invalidFields.length === 0) {
           return await hostedFieldsInstance.current?.tokenize()
         } else {
-          throw invalidFields
+          return Promise.reject(invalidFields)
         }
       }
     } catch (err) {
-      return err
+      return Promise.reject(err)
     }
   }
 

@@ -49,10 +49,10 @@
   resolved "https://registry.yarnpkg.com/@braintree/wrap-promise/-/wrap-promise-2.1.0.tgz#7e27ffc5dacd2d71533b0c42506eea8e7c2e50fa"
   integrity sha512-UIrJB+AfKU0CCfbMoWrsGpd2D/hBpY/SGgFI6WRHPOwhaZ3g9rz1weiJ6eb6L9KgVyunT7s2tckcPkbHw+NzeA==
 
-"@paypal/paypal-js@3.1.7":
-  version "3.1.7"
-  resolved "https://registry.yarnpkg.com/@paypal/paypal-js/-/paypal-js-3.1.7.tgz#5cf15e89ccf06fa51eeeeb959d249a74720c2ec4"
-  integrity sha512-dxWEZE4YN24BEGIJ3dnGDuhKj1FYDstRfkcluORwEdZq69dAmEUps9R5XKuSTLu4AJp9LzxW1havXQdDjhlfOw==
+"@paypal/paypal-js@3.1.8":
+  version "3.1.8"
+  resolved "https://registry.yarnpkg.com/@paypal/paypal-js/-/paypal-js-3.1.8.tgz#69c8170a37ddc307776df2f1887087f36afdb141"
+  integrity sha512-G5U+OxoUzhMnfwkohcO/587cxtlgT03VNlVobAbqd28XxdaUPFRyszt5CqLAOmrOyoVw4ApaFzHQxVbICgMcAg==
   dependencies:
     promise-polyfill "^8.2.0"
 

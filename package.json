@@ -7,7 +7,7 @@
   "author": "Lionel Tzatzkin <elrumordelaluz@hotmail.com> (https://elrumordelaluz.com/)",
   "license": "MIT",
   "devDependencies": {
-    "@paypal/paypal-js": "3.1.7",
+    "@paypal/paypal-js": "3.1.8",
     "@rollup/plugin-typescript": "8.2.1",
     "@types/braintree-web": "3.75.0",
     "@types/react": "17.0.3",
