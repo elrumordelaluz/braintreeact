@@ -29,6 +29,6 @@
   "scripts": {
     "build": "rollup -c",
     "watch": "rollup -cw",
-    "prepare": "rollup -c"
+    "prepare": "npm run build"
   }
 }
