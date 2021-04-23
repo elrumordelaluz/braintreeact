@@ -29,6 +29,6 @@
   "scripts": {
     "build": "rollup -c",
     "watch": "rollup -cw",
-    "prepublish": "rollup -c"
+    "prepare": "rollup -c"
   }
 }
