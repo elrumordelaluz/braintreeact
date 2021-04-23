@@ -49,6 +49,13 @@ export type FieldEvents = {
   onInputSubmitRequest?: (event: braintree.HostedFieldsStateObject) => void
 }
 
+type BaseFieldProps = {
+  className?: string
+  style?: React.CSSProperties
+}
+
+export type FieldProps = BaseFieldProps & FieldOptions & FieldEvents
+
 export type PaypalButtonStyles = {
   shape?: 'pill' | 'rect'
   color?: 'gold' | 'blue' | 'silver' | 'white' | 'black'

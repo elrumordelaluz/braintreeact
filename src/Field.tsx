@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useRef } from 'react'
 import DropinConsumer from './Context'
-import { FieldOptions, FieldEvents } from './types'
+import { FieldProps } from './types'
 
-const Field: React.FC<BaseProps & FieldOptions & FieldEvents> = ({
+const Field: React.FC<FieldProps> = ({
   children,
   className,
   style,
@@ -27,8 +27,3 @@ const Field: React.FC<BaseProps & FieldOptions & FieldEvents> = ({
 }
 
 export default Field
-
-type BaseProps = {
-  className?: string
-  style?: React.CSSProperties
-}

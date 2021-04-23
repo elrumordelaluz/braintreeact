@@ -5,6 +5,7 @@ import {
   PaypalButton,
   DropinContext,
   PaypalButtonStyles,
+  FieldProps,
 } from 'braintreeact'
 import cn from 'classnames'
 import DatGui, { DatBoolean, DatNumber, DatSelect } from 'react-dat-gui'
@@ -13,10 +14,11 @@ import './App.css'
 import 'react-dat-gui/dist/index.css'
 
 function App() {
-  const [data, setState] = useState<PaypalButtonStyles>({
+  const [data, setState] = useState<PaypalButtonStyles & { width: number }>({
     shape: 'rect',
     color: 'black',
     size: 'responsive',
+    width: 200,
     height: 55,
     label: 'paypal',
     layout: 'horizontal',
@@ -27,9 +29,6 @@ function App() {
   function handleUpdate(newData: any) {
     setState((s) => ({ ...s, ...newData }))
   }
-
-  const [focused, setFocused] = useState(false)
-  const [isEmpty, setIsEmpty] = useState(true)
 
   return (
     <div className="container">
@@ -45,6 +44,7 @@ function App() {
           label="Size"
           options={['small', 'medium', 'large', 'responsive']}
         />
+        <DatNumber path="width" label="Width" min={75} max={500} step={1} />
         <DatNumber path="height" label="Height" min={25} max={55} step={1} />
         <DatSelect
           path="label"
@@ -76,38 +76,53 @@ function App() {
         }}
       >
         <h1>Lorem Ipsum</h1>
-        <div className="fieldContainer">
-          <label>
-            <span
-              className={cn('label', {
-                focused: focused || !isEmpty,
-              })}
-            >
-              Card Number
-            </span>
-
-            <Field
-              type="number"
-              placeholder="4111111111111111"
-              onFocus={() => setFocused(true)}
-              onBlur={(fields) => {
-                setFocused(false)
-                setIsEmpty(fields.fields.number.isEmpty)
-              }}
-            />
-          </label>
-        </div>
-        <Field type="cvv" prefill="123" />
-        <CustomButton />
+        <CustomField type="number" placeholder="4111 1111 1111 1111" />
+        <Field
+          type="cvv"
+          prefill="123"
+          onFocus={() => console.log('cvv focused')}
+        />
+        <CustomButton width={data.width} />
         <Results />
       </Dropin>
     </div>
   )
 }
 
-function CustomButton() {
+function CustomButton({ width = 100 }) {
   const { paypalPayload } = useContext(DropinContext)
-  return <>{paypalPayload ? JSON.stringify(paypalPayload) : <PaypalButton />}</>
+  return (
+    <div style={{ width }}>
+      {paypalPayload ? JSON.stringify(paypalPayload) : <PaypalButton />}
+    </div>
+  )
+}
+
+const CustomField: React.FC<FieldProps> = (props) => {
+  const [focused, setFocused] = useState(false)
+  const [isEmpty, setIsEmpty] = useState(true)
+  return (
+    <div className="fieldContainer">
+      <label>
+        <span
+          className={cn('label', {
+            focused: focused || !isEmpty,
+          })}
+        >
+          Card Number
+        </span>
+
+        <Field
+          {...props}
+          onFocus={() => setFocused(true)}
+          onBlur={(fields) => {
+            setFocused(false)
+            setIsEmpty(fields.fields.number.isEmpty)
+          }}
+        />
+      </label>
+    </div>
+  )
 }
 
 function Results() {
@@ -122,7 +137,7 @@ function Results() {
       <button
         onClick={async () => {
           try {
-            const nonce = await getPayload()
+            const { nonce } = await getPayload()
             alert(JSON.stringify({ nonce }))
           } catch (err) {
             console.log({ err })
