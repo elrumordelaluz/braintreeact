@@ -74,25 +74,71 @@ function App() {
         }}
         withPaypal
       >
-        <h1>Lorem Ipsum</h1>
-        <CustomField type="number" placeholder="4111 1111 1111 1111" />
+        <h1>Braintreeact</h1>
+        <CustomField type="number" />
+        <label>
+          CVV:
+          <Field
+            type="cvv"
+            placeholder="123"
+            onFocus={() => console.log('cvv focused')}
+            className="simpleField"
+          />
+        </label>
+        <hr />
         <Field
-          type="cvv"
-          prefill="123"
-          onFocus={() => console.log('cvv focused')}
+          type="expirationMonth"
+          placeholder="11"
+          onFocus={() => console.log('expiration year focused')}
+          className="yearField"
+        />{' '}
+        /
+        <Field
+          type="expirationYear"
+          placeholder="21"
+          onFocus={() => console.log('expiration year focused')}
+          className="yearField"
         />
-        <CustomButton width={data.width} />
+        <hr />
+        {/*<Field
+          type="expirationDate"
+          placeholder="11/21"
+          onFocus={() => console.log('expiration year focused')}
+          className="simpleField"
+        />{' '} */}
+        <PaypalButtonWithInfo width={data.width} />
         <Results />
       </Dropin>
     </div>
   )
 }
 
-function CustomButton({ width = 100 }) {
-  const { paypalPayload } = useContext(DropinContext)
+function PaypalButtonWithInfo({ width = 100 }) {
+  const { paypalReady, paypalPayload, reset } = useContext(DropinContext)
   return (
-    <div style={{ width }}>
-      {paypalPayload ? JSON.stringify(paypalPayload) : <PaypalButton />}
+    <div
+      style={{
+        width: paypalPayload ? '100%' : width,
+        marginBottom: 50,
+        opacity: paypalReady ? 1 : 0.5,
+        pointerEvents: paypalReady ? 'auto' : 'none',
+        marginTop: '1em',
+      }}
+    >
+      {paypalPayload ? (
+        <div className="paypalMethod">
+          <img
+            src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_100x26.png"
+            alt="PayPal Logo"
+          />
+          {paypalPayload.details.email}
+          <button onClick={reset} className="paypalMethodReset">
+            Reset
+          </button>
+        </div>
+      ) : (
+        <PaypalButton />
+      )}
     </div>
   )
 }
@@ -101,26 +147,24 @@ const CustomField: React.FC<FieldProps> = (props) => {
   const [focused, setFocused] = useState(false)
   const [isEmpty, setIsEmpty] = useState(true)
   return (
-    <div className="fieldContainer">
-      <label>
-        <span
-          className={cn('label', {
-            focused: focused || !isEmpty,
-          })}
-        >
-          Card Number
-        </span>
-
-        <Field
-          {...props}
-          onFocus={() => setFocused(true)}
-          onBlur={(fields) => {
-            setFocused(false)
-            setIsEmpty(fields.fields.number.isEmpty)
-          }}
-        />
-      </label>
-    </div>
+    <label className="fieldContainer">
+      <div
+        className={cn('label', {
+          focused: focused || !isEmpty,
+        })}
+      >
+        Card Number
+      </div>
+      <Field
+        {...props}
+        onFocus={() => setFocused(true)}
+        onBlur={(fields) => {
+          setFocused(false)
+          setIsEmpty(fields.fields.number.isEmpty)
+        }}
+        className="field"
+      />
+    </label>
   )
 }
 
@@ -153,22 +197,21 @@ export default App
 
 const styles = {
   input: {
-    'font-size': '16px',
-    'font-family': 'courier, monospace',
-    'font-weight': 'lighter',
-    color: '#ccc',
-    padding: '1em 0',
+    'font-size': '18px',
+    'font-family': 'Avenir',
+    'font-weight': '400',
+    color: '#6e6e6f',
   },
   label: {
     height: '30px',
   },
   ':focus': {
-    color: 'black',
+    color: '#6e6e6f',
   },
   '.valid': {
-    color: '#007aff',
+    color: '#09090f',
   },
   '.invalid': {
-    color: 'red',
+    color: '#ff3b57',
   },
 }

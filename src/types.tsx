@@ -27,7 +27,7 @@ export type HostedFieldsEvents = {
 export type FieldOptions = {
   container?: string | HTMLElement
   placeholder?: string
-  type: string
+  type: HostedFieldsHostedFieldsFieldName
   internalLabel?: string
   formatInput?: boolean
   maskInput?: object | boolean
