@@ -114,7 +114,8 @@ const DropinProvider: React.FC<DropinProps> = ({
           // @ts-ignore
           const btn = await paypal.Buttons({
             style: paypalStyles,
-
+            // @ts-ignore
+            fundingSource: paypal.FUNDING.PAYPAL,
             createBillingAgreement: function () {
               return paypalInstance.current?.createPayment({
                 // @ts-ignore
