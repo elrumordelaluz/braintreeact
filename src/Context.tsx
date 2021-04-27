@@ -106,22 +106,23 @@ const DropinProvider: React.FC<DropinProps> = ({
             client,
           })
           await paypalInstance.current.loadPayPalSDK({
-            vault: true,
-            // @ts-ignore
-            'disable-funding': 'card',
+            // vault: true,
+            // // intent: 'tokenize',
           })
 
           // @ts-ignore
           const btn = await paypal.Buttons({
             style: paypalStyles,
-            // @ts-ignore
-            fundingSource: paypal.FUNDING.PAYPAL,
-            createBillingAgreement: function () {
-              return paypalInstance.current?.createPayment({
-                // @ts-ignore
-                flow: 'vault',
-              })
-            },
+            // // @ts-ignore
+            // fundingSource: paypal.FUNDING.PAYPAL,
+            // createBillingAgreement: function () {
+            //   return paypalInstance.current?.createPayment({
+            //     // @ts-ignore
+            //     flow: 'vault',
+            //     // @ts-ignore
+            //     intent: 'tokenize',
+            //   })
+            // },
 
             onApprove: function (data: any) {
               return paypalInstance.current?.tokenizePayment(
