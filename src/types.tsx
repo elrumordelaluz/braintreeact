@@ -5,7 +5,7 @@ export type DropinProps = {
   env?: 'sandbox' | 'production'
   children?: React.ReactNode
   styles?: object
-  paypalClientId?: string
+  withPaypal?: boolean
   paypalStyles?: PaypalButtonStyles
 }
 

@@ -23,7 +23,6 @@ function App() {
     label: 'paypal',
     layout: 'horizontal',
     tagline: false,
-    fundingicons: false,
   })
 
   function handleUpdate(newData: any) {
@@ -56,14 +55,14 @@ function App() {
           label="Layout"
           options={['horizontal', 'vertical']}
         />
-        <DatBoolean path="tagline" label="Tagline" />
-        <DatBoolean path="fundingicons" label="Funding Icons" />
+        {data.layout === 'horizontal' && (
+          <DatBoolean path="tagline" label="Tagline" />
+        )}
       </DatGui>
 
       <Dropin
         authorization={process.env.REACT_APP_AUTHORIZATION as string}
         styles={styles}
-        paypalClientId={process.env.REACT_APP_PAYPAL_CLIENT_ID}
         paypalStyles={{
           shape: data.shape,
           color: data.color,
@@ -72,8 +71,8 @@ function App() {
           label: data.label,
           layout: data.layout,
           tagline: data.tagline,
-          fundingicons: data.fundingicons,
         }}
+        withPaypal
       >
         <h1>Lorem Ipsum</h1>
         <CustomField type="number" placeholder="4111 1111 1111 1111" />

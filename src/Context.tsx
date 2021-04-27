@@ -39,7 +39,7 @@ const DropinProvider: React.FC<DropinProps> = ({
   children,
   authorization,
   styles,
-  paypalClientId,
+  withPaypal,
   paypalStyles,
 }) => {
   const [fields, setFields] = useState<HostedFieldFieldOptions>({
@@ -101,12 +101,11 @@ const DropinProvider: React.FC<DropinProps> = ({
   const initPaypal = useCallback(
     async function () {
       try {
-        if (client && paypalClientId) {
+        if (client && withPaypal) {
           paypalInstance.current = await paypalCheckout.create({
             client,
           })
           await paypalInstance.current.loadPayPalSDK({
-            'client-id': paypalClientId,
             vault: true,
             // @ts-ignore
             'disable-funding': 'card',
@@ -151,7 +150,7 @@ const DropinProvider: React.FC<DropinProps> = ({
         console.error('PayPal mounting error', err)
       }
     },
-    [client, paypalClientId, paypalStyles]
+    [client, withPaypal, paypalStyles]
   )
 
   useEffect(() => {
